@@ -12,3 +12,10 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+.buttons-numbers {
+  padding-top: 30px;
+}
+.buttons-operators {
+  padding-top: 15px;
+}
