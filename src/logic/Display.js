@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 
 class Display extends Component {
     render() {
+        const { result, a, b } = this.props;
         return (
             <div>
-                <h1>Welcome to study calculator!</h1>
-                <p>Enter your calculations here</p>
-                <input type="text" size="30"
-                />
+                <div className="input">
+                    {
+                        a !== result ? result : b
+                    }
+                </div>
             </div>
         );
     }

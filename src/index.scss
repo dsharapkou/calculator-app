@@ -1,0 +1,76 @@
+@import url(https://fonts.googleapis.com/css?family=Muli:200,300,400);
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Muli, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+}
+
+form {
+  width: 100px;
+  text-align: center;
+  margin: auto;
+  background: black;
+  padding: 10px 0 5px 0;
+  border-radius: 2px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+.buttons-numbers {
+  padding-top: 30px;
+  child-align: middle;
+}
+.buttons-operators {
+  padding-top: 15px;
+}
+
+.button {
+  margin: 2px;
+  background: #333;
+  color: #FFF;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  text-align: center;
+  font-weight: 100;
+  font-size: 10px;
+  line-height: 20px;
+  border-radius: 20px;
+}
+
+.calculator-body {
+  width: 100px;
+  margin: auto;
+
+}
+
+.button-name-0 {
+  width: 45%;
+}
+
+.buttons_style_operators {
+  background: #fd9503;
+}
+
+.buttons_style_manage {
+  background: #a5a5a5;
+}
+
+.input {
+  width: 95%;
+  height: 30px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: white;
+  font-size: 16px;
+  font-weight: 100;
+  text-align: right;
+}

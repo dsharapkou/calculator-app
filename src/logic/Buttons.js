@@ -3,70 +3,128 @@ import Button from './Button';
 
 class Buttons extends Component {
 
-    constructor(props) {
-        super(props);
-
-        this.a = '';
-        this.b = '';
-        this.result = '';
-        this.operation = '';
-    };
-
     onClick = (value) => {
-        if (this.operation) {
-            this.b = this.b + value;
+        let object = {};
+        if (this.props.operation) {
+            object = {
+                b: this.props.b + value,
+            };
         } else {
-            this.a = this.a + value;
+            object = {
+                a: this.props.a + value,
+                result: this.props.a + value,
+            };
         }
-        console.log(this.a);
-        console.log(this.b);
 
+        this.props.goState(object);
+        //debugger;
+        console.log(object);
     };
+
     clear = () => {
-        this.a = '';
-        this.b = '';
-        this.result = '';
-        this.operation = '';
+        this.props.goState({
+            a : 0,
+            b : 0,
+            result : 0,
+            operation : null
+        });
         console.log('inside of clear');
     };
+
     setOperation = (value) => {
-        this.operation = value;
-        console.log(this.operation);
+        this.props.goState({
+            operation: value,
+            result: this.props.a,
+            a: 0
+        });
+
+        console.log('setting operation');
+        console.log(this.props);
     };
+
     multiply = (a, b) => {
         return parseFloat(a) * parseFloat(b);
     };
+
     sum = (a, b) => {
         return parseFloat(a) + parseFloat(b);
     };
+
     substract = (a, b) => {
         return parseFloat(a) - parseFloat(b);
     };
+
     division = (a, b) => {
         return parseFloat(a) / parseFloat(b);
     };
 
     calculateResult = () => {
-        if (this.operation === "multiply") {
+        let operation = this.props.operation;
+        console.log('this is operation: ' +operation);
+        console.log('this is result: ' + this.props.result);
+        console.log('this is a: ' + this.props.a);
+        console.log('this is b: ' + this.props.b);
+
+        if (operation === "multiply") {
+            this.props.goState({
+                result: this.multiply(this.props.result, this.props.b),
+                a: 0
+            });
+        } else if (operation === "division") {
+            this.props.goState({
+                result: this.division(this.props.result, this.props.b),
+                a: 0
+            });
+        } else if (operation === "sum") {
+            this.props.goState({
+                result: this.sum(this.props.result, this.props.b),
+                a: 0
+            });
+        } else if (operation === "substract") {
+            this.props.goState({
+                result: this.substract(this.props.result, this.props.b ),
+                a: 0
+            });
+        }
+
+
+        /*
+        this.props.goState({
+            result: operation === "multiply" ? this.multiply(this.props.result, this.props.a) : false
+        });
+
+        */
+
+        /*this.props.goState({
+            result: this.props.result
+        });
+        this.props.result = operation === "multiply" ? this.multiply(this.props.result, this.props.a) : false;
+        this.props.result = operation === "sum" ? this.sum(this.props.result, this.props.a) : false;
+        this.props.result = operation === "division" ? this.division(this.props.result, this.props.a) : false;
+        this.props.result = operation === "substract" ? this.substract(this.props.result, this.props.a) : false;
+        console.log(operation);
+        */
+        /*
+        if (this.props.operation === "multiply") {
             if (this.result) {
                 console.log('result exists');
                 this.result = this.multiply(this.result, this.b);
             } else {
-                this.result = this.multiply(this.a, this.b);
+                this.result = this.multiply(this.props.a, this.props.result);
                 console.log('result not exists');
             }
 
-        } else if (this.operation === "sum") {
+        } else if (this.props.operation === "sum") {
             if (this.result) {
                 console.log('result exists');
                 this.result = this.sum(this.result, this.b);
             } else {
-                this.result = this.sum(this.a, this.b)
+                this.result = this.sum(this.a, this.b);
                 console.log('result not exists');
 
-            };
+            }
 
-        } else if (this.operation === "substract") {
+        } else if (this.props.operation === "substract") {
             if (this.result) {
                 console.log('result exists');
                 this.result = this.substract(this.result, this.b);
@@ -74,7 +132,7 @@ class Buttons extends Component {
                 this.result = this.substract(this.a, this.b);
                 console.log('result not exists');
             }
-        } else if (this.operation === "division") {
+        } else if (this.props.operation === "division") {
             if (this.result) {
                 console.log('result exists');
                 this.result = this.division(this.result, this.b);
@@ -85,11 +143,14 @@ class Buttons extends Component {
 
             }
         }
-
-
-        console.log(this.result);
+        */
     };
-
+    opposite = () => {
+        this.props.goState({
+            result : - (this.props.result),
+            a: - (this.props.a)
+        })
+    };
 
 
     render() {
@@ -98,25 +159,25 @@ class Buttons extends Component {
                 key="AC"
                 label="AC"
                 onClick={() => this.clear()}
-                group="buttons_style"
+                group="buttons_style_manage"
             />,
             <Button
                 key="+/-"
                 label="+/-"
-                onClick={() => this.clear()}
-                group="buttons_style"
+                onClick={() => this.opposite()}
+                group="buttons_style_manage"
             />,
             <Button
                 key="%"
                 label="%"
                 onClick={() => this.clear()}
-                group="buttons_style"
+                group="buttons_style_manage"
             />,
             <Button
                 key="/"
                 label="/"
                 onClick={() => this.setOperation("division")}
-                group="buttons_style"
+                group="buttons_style_operators"
             />,
             <Button
                 key="7"
@@ -140,7 +201,7 @@ class Buttons extends Component {
                 key="*"
                 label="*"
                 onClick={() => this.setOperation("multiply")}
-                group="buttons_style"
+                group="buttons_style_operators"
             />,
             <Button
                 key="4"
@@ -164,7 +225,7 @@ class Buttons extends Component {
                 key="+"
                 label="+"
                 onClick={() => this.setOperation("sum")}
-                group="buttons_style"
+                group="buttons_style_operators"
             />,
             <Button
                 key="1"
@@ -188,7 +249,7 @@ class Buttons extends Component {
                 key="-"
                 label="-"
                 onClick={() => this.setOperation("substract")}
-                group="buttons_style"
+                group="buttons_style_operators"
             />,
             <Button
                 key="0"
@@ -205,8 +266,8 @@ class Buttons extends Component {
             <Button
                 key="="
                 label="="
-                onClick={() => this.calculateResult()}
-                group="buttons_style"
+                onClick={() => this.calculateResult(this.props.a, this.props.b, this.props.result )}
+                group="buttons_style_operators"
             />,
 
         ];
