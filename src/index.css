@@ -15,7 +15,26 @@ code {
 
 .buttons-numbers {
   padding-top: 30px;
+  child-align: middle;
 }
 .buttons-operators {
   padding-top: 15px;
+}
+
+.button {
+  margin: 0;
+  background: #333;
+  color: #FFF;
+  width: 25%;
+  display: inline-block;
+  text-align: center;
+}
+
+.button_list {
+  width: 72px;
+  margin: auto;
+}
+
+.button-name-0 {
+  width: 50%;
 }
