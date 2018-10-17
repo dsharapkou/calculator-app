@@ -7,7 +7,7 @@ class Display extends Component {
             <div>
                 <div className="input">
                     {
-                        a !== result ? result : b
+                        result
                     }
                 </div>
             </div>
