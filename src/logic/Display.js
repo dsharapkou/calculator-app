@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 
 class Display extends Component {
     render() {
-        const { result, a, b } = this.props;
+        const { display } = this.props;
         return (
             <div>
                 <div className="input">
                     {
-                        result
+                        display
                     }
                 </div>
             </div>

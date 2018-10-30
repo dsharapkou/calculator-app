@@ -1,32 +1,31 @@
+import _ from 'lodash';
 import React, {Component} from 'react';
 import Button from './Button';
 
 class Buttons extends Component {
 
     onClick = (value) => {
-        let object = {};
         if (this.props.operation) {
-            object = {
-                b: this.props.b + value,
-            };
+            const b = _.concat(this.props.b, value).join('');
+            this.props.goState({
+                display: b,
+                b: b,
+            });
         } else {
-            object = {
-                a: this.props.a + value,
-                result: this.props.a + value,
-            };
+            const a = _.concat(this.props.a, value).join('');
+            this.props.goState({
+                a: a,
+                display: a,
+            });
         }
-
-        this.props.goState(object);
-        //debugger;
-        console.log(object);
-    };
+};
 
     clear = () => {
         this.props.goState({
-            a : 0,
-            b : 0,
-            result : 0,
-            operation : null
+            a: [],
+            b: [],
+            display: 0,
+            operation: null
         });
         console.log('inside of clear');
     };
@@ -34,8 +33,6 @@ class Buttons extends Component {
     setOperation = (value) => {
         this.props.goState({
             operation: value,
-            result: this.props.a,
-            a: 0
         });
 
         console.log('setting operation');
@@ -60,96 +57,37 @@ class Buttons extends Component {
 
     calculateResult = () => {
         let operation = this.props.operation;
-        console.log('this is operation: ' +operation);
-        console.log('this is result: ' + this.props.result);
-        console.log('this is a: ' + this.props.a);
-        console.log('this is b: ' + this.props.b);
-
+        console.log(this.props);
         if (operation === "multiply") {
+            const multiplyResult = this.multiply(this.props.a, this.props.b);
             this.props.goState({
-                result: this.multiply(this.props.result, this.props.b),
-                a: 0
+                a: multiplyResult,
+                display: multiplyResult,
             });
         } else if (operation === "division") {
+            const divisionResult = this.division(this.props.a, this.props.b);
             this.props.goState({
-                result: this.division(this.props.result, this.props.b),
-                a: 0
+                a: divisionResult,
+                display: divisionResult,
             });
         } else if (operation === "sum") {
+            const sumResult = this.sum(this.props.a, this.props.b);
             this.props.goState({
-                result: this.sum(this.props.result, this.props.b),
-                a: 0
+                a: sumResult,
+                display: sumResult,
             });
         } else if (operation === "substract") {
+            const substractResult = this.substract(this.props.a, this.props.b);
             this.props.goState({
-                result: this.substract(this.props.result, this.props.b ),
-                a: 0
+                a: substractResult,
+                display: substractResult,
             });
         }
-
-
-        /*
-        this.props.goState({
-            result: operation === "multiply" ? this.multiply(this.props.result, this.props.a) : false
-        });
-
-        */
-
-        /*this.props.goState({
-            result: this.props.result
-        });
-        this.props.result = operation === "multiply" ? this.multiply(this.props.result, this.props.a) : false;
-        this.props.result = operation === "sum" ? this.sum(this.props.result, this.props.a) : false;
-        this.props.result = operation === "division" ? this.division(this.props.result, this.props.a) : false;
-        this.props.result = operation === "substract" ? this.substract(this.props.result, this.props.a) : false;
-        console.log(operation);
-        */
-        /*
-        if (this.props.operation === "multiply") {
-            if (this.result) {
-                console.log('result exists');
-                this.result = this.multiply(this.result, this.b);
-            } else {
-                this.result = this.multiply(this.props.a, this.props.result);
-                console.log('result not exists');
-            }
-
-        } else if (this.props.operation === "sum") {
-            if (this.result) {
-                console.log('result exists');
-                this.result = this.sum(this.result, this.b);
-            } else {
-                this.result = this.sum(this.a, this.b);
-                console.log('result not exists');
-
-            }
-
-        } else if (this.props.operation === "substract") {
-            if (this.result) {
-                console.log('result exists');
-                this.result = this.substract(this.result, this.b);
-            } else {
-                this.result = this.substract(this.a, this.b);
-                console.log('result not exists');
-            }
-        } else if (this.props.operation === "division") {
-            if (this.result) {
-                console.log('result exists');
-                this.result = this.division(this.result, this.b);
-            } else {
-
-                this.result = this.division(this.a, this.b);
-                console.log('result not exists');
-
-            }
-        }
-        */
     };
     opposite = () => {
         this.props.goState({
-            result : - (this.props.result),
-            a: - (this.props.a)
-        })
+            display: -1 * (this.props.display),
+        });
     };
 
 
@@ -266,7 +204,7 @@ class Buttons extends Component {
             <Button
                 key="="
                 label="="
-                onClick={() => this.calculateResult(this.props.a, this.props.b, this.props.result )}
+                onClick={() => this.calculateResult()}
                 group="buttons_style_operators"
             />,
 

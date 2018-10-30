@@ -6,13 +6,13 @@ import '../App.css';
 class App extends Component {
 
     state = {
-        a : 0,
-        b : 0,
-        result : 0,
+        a : [],
+        b : [],
+        display : 0,
         operation : null,
     };
     render() {
-        const { a, b, result, operation } = this.state;
+        const { a, b, result, display, operation } = this.state;
 
     return (
       <div className="App">
@@ -20,11 +20,12 @@ class App extends Component {
           <p>Enter your calculations here</p>
           <form>
               <div className="calculator-body">
-                  <Display result={result} />
+                  <Display display={display} />
                   <Buttons
                     a={a}
                     b={b}
                     result={result}
+                    display={display}
                     operation={operation}
                     goState={this.setState.bind(this)}
                   />
