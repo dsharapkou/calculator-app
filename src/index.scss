@@ -6,6 +6,7 @@ body {
   font-family: Muli, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition-delay: 2s;
 }
 
 form {
@@ -60,6 +61,10 @@ code {
 
 .buttons_style_operators {
   background: #fd9503;
+  &.active {
+    background: white;
+    color: #fd9503;
+  }
 }
 
 .buttons_style_manage {
@@ -81,4 +86,8 @@ code {
 h1 {
   font-size: 10px;
 
+}
+
+.active {
+  background-color: white;
 }

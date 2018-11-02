@@ -8,11 +8,13 @@ class App extends Component {
     state = {
         a : [],
         b : [],
+        bMemory : null,
         display : 0,
         operation : null,
+        isSelected: false,
     };
     render() {
-        const { a, b, result, display, operation } = this.state;
+        const { a, b, display, operation, isSelected } = this.state;
 
     return (
       <div className="App">
@@ -24,10 +26,10 @@ class App extends Component {
                   <Buttons
                     a={a}
                     b={b}
-                    result={result}
                     display={display}
                     operation={operation}
                     goState={this.setState.bind(this)}
+                    isSelected={isSelected}
                   />
               </div>
           </form>

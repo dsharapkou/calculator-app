@@ -18,22 +18,42 @@ class Buttons extends Component {
                 display: a,
             });
         }
+        console.log(value);
+        console.log(this.props);
 };
 
     clear = () => {
         this.props.goState({
             a: [],
             b: [],
+            bMemory : 0,
             display: 0,
-            operation: null
+            operation: null,
         });
         console.log('inside of clear');
     };
 
     setOperation = (value) => {
+        // const b = this.props.b;
+        // if (b.length === 0) {
+        //     console.log(typeof b);
+        //     console.log(this.props.a);
+        //     console.log(b);
+        //     console.log(b.length);
+        //     this.props.goState({
+        //         operation: value,
+        //     });
+        // } this.props.goState({
+        //     operation: value,
+        //     a: b,
+        //     b: [],
+        // });
         this.props.goState({
             operation: value,
+            b: [],
         });
+        console.log(value);
+
 
         console.log('setting operation');
         console.log(this.props);
@@ -56,6 +76,7 @@ class Buttons extends Component {
     };
 
     calculateResult = () => {
+
         let operation = this.props.operation;
         console.log(this.props);
         if (operation === "multiply") {
@@ -116,6 +137,7 @@ class Buttons extends Component {
                 label="/"
                 onClick={() => this.setOperation("division")}
                 group="buttons_style_operators"
+                className={ this.props.operation === "division" ? "active" : "" }
             />,
             <Button
                 key="7"
@@ -140,6 +162,7 @@ class Buttons extends Component {
                 label="*"
                 onClick={() => this.setOperation("multiply")}
                 group="buttons_style_operators"
+                className={ this.props.operation === "multiply" ? "active" : "" }
             />,
             <Button
                 key="4"
@@ -164,6 +187,7 @@ class Buttons extends Component {
                 label="+"
                 onClick={() => this.setOperation("sum")}
                 group="buttons_style_operators"
+                className={ this.props.operation === "sum" ? "active" : "" }
             />,
             <Button
                 key="1"
@@ -188,6 +212,7 @@ class Buttons extends Component {
                 label="-"
                 onClick={() => this.setOperation("substract")}
                 group="buttons_style_operators"
+                className={ this.props.operation === "substract" ? "active" : "" }
             />,
             <Button
                 key="0"
@@ -198,7 +223,7 @@ class Buttons extends Component {
             <Button
                 key=","
                 label=","
-                onClick={() => console.log('handleClick ,')}
+                onClick={() => this.onClick('.')}
                 group="buttons_style"
             />,
             <Button
