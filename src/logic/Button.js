@@ -5,7 +5,7 @@ class Button extends React.PureComponent {
         return (
             <a
                 onClick={this.props.onClick}
-                className={`${this.props.group} button button-name-${this.props.label} ${this.props.className}`}
+                className={`${this.props.group} button button-name-${this.props.label}`}
             >
                 {this.props.label}
             </a>
